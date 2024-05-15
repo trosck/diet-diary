@@ -6,4 +6,7 @@ export default defineNuxtConfig({
     strategy: "no_prefix",
     defaultLocale: "ru",
   },
+  devServer: {
+    host: "0.0.0.0",
+  },
 });
