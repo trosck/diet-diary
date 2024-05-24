@@ -12,8 +12,11 @@
   "dependencies": {
     "@nuxt/ui": "^2.16.0",
     "@nuxtjs/i18n": "^8.3.1",
+    "@pinia/nuxt": "^0.5.1",
     "fast-xml-parser": "^4.3.5",
     "nuxt": "^3.10.3",
+    "pinia": "^2.1.7",
+    "typescript": "^5.4.5",
     "vue": "^3.4.19",
     "vue-router": "^4.3.0"
   }
