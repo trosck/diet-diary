@@ -2,10 +2,14 @@ export default defineI18nConfig(() => ({
   legacy: false,
   messages: {
     en: {
-      diary: "Diary"
+      diary: "Diary",
+      add: "Add",
+      list: "List",
     },
     ru: {
-      diary: "Журнал"
-    }
-  }
+      diary: "Журнал",
+      add: "Добавить",
+      list: "Список",
+    },
+  },
 }));
