@@ -22,10 +22,9 @@
       </div>
     </template>
   </USelectMenu>
-  {{ selected }}
 </template>
 
 <script setup lang="ts">
-const productsStore = userProductsStore();
+const productsStore = useProductsStore();
 const selected = ref(null);
 </script>
