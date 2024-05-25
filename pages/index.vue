@@ -14,18 +14,21 @@
     <div class="absolute bottom-0 flex justify-between w-full h-14">
       <UButton
         :label="$t('diary')"
-        :ui="{ base: 'grow flex justify-center', rounded: 'rounded-none' }"
         @click="screen = SCREEN_TYPE.DIARY"
+        :variant="screen === SCREEN_TYPE.DIARY ? 'outline' : 'solid'"
+        :ui="{ base: 'grow flex justify-center', rounded: 'rounded-none' }"
       />
       <UButton
         :label="$t('list')"
-        :ui="{ base: 'grow flex justify-center', rounded: 'rounded-none' }"
         @click="screen = SCREEN_TYPE.LIST"
+        :variant="screen === SCREEN_TYPE.LIST ? 'outline' : 'solid'"
+        :ui="{ base: 'grow flex justify-center', rounded: 'rounded-none' }"
       />
       <UButton
         label="some"
-        :ui="{ base: 'grow flex justify-center', rounded: 'rounded-none' }"
         @click="screen = SCREEN_TYPE.SOME"
+        :variant="screen === SCREEN_TYPE.SOME ? 'outline' : 'solid'"
+        :ui="{ base: 'grow flex justify-center', rounded: 'rounded-none' }"
       />
     </div>
   </div>
@@ -41,7 +44,7 @@ const SCREEN_TYPE = {
   SOME: "some",
 };
 
-const screen = ref(SCREEN_TYPE.DIARY);
+const screen = ref(SCREEN_TYPE.LIST);
 
 const isLoading = ref(false);
 
