@@ -1,7 +1,7 @@
 <template>
   <UCard :ui="{ base: $props.class }">
     <template #header>
-      <div>{{ $props.name }} {{ $props.class }}</div>
+      <div>{{ $props.name }}</div>
     </template>
 
     <ProductNutrientList v-bind="$props" row />
