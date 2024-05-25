@@ -1,27 +1,33 @@
 <template>
-  <div class="w-[350px] m-auto p-2.5 relative h-screen">
-    <div class="fixed z-10" v-if="isLoading">
-      <USkeleton class="h-40 w-full mb-5" />
-      <USkeleton class="h-40 w-full mb-5" />
-      <USkeleton class="h-40 w-full" />
+  <div class="w-full relative h-screen">
+    <div class="p-5">
+      <div class="fixed z-10" v-if="isLoading">
+        <USkeleton class="h-40 w-full mb-5" />
+        <USkeleton class="h-40 w-full mb-5" />
+        <USkeleton class="h-40 w-full" />
+      </div>
+
+      <Diary v-if="screen === SCREEN_TYPE.DIARY" />
+      <List v-if="screen === SCREEN_TYPE.LIST" />
     </div>
 
-    <Diary v-if="screen === SCREEN_TYPE.DIARY" />
-    <List v-if="screen === SCREEN_TYPE.LIST" />
-
-    <UContainer class="absolute bottom-0 flex justify-between w-full pb-5">
+    <div class="absolute bottom-0 flex justify-between w-full h-14">
       <UButton
         :label="$t('diary')"
-        class="m-auto"
+        :ui="{ base: 'grow flex justify-center', rounded: 'rounded-none' }"
         @click="screen = SCREEN_TYPE.DIARY"
       />
       <UButton
         :label="$t('list')"
-        class="m-auto"
+        :ui="{ base: 'grow flex justify-center', rounded: 'rounded-none' }"
         @click="screen = SCREEN_TYPE.LIST"
       />
-      <UButton label="some" class="m-auto" @click="screen = SCREEN_TYPE.SOME" />
-    </UContainer>
+      <UButton
+        label="some"
+        :ui="{ base: 'grow flex justify-center', rounded: 'rounded-none' }"
+        @click="screen = SCREEN_TYPE.SOME"
+      />
+    </div>
   </div>
 </template>
 
