@@ -6,7 +6,7 @@
     <UButton
       icon="i-heroicons-calendar-days-20-solid"
       :label="format(date, 'd MMM, yyy')"
-      :ui="{ base: 'w-full' }"
+      block
     />
 
     <template #panel="{ close }">
