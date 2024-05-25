@@ -1,3 +1,5 @@
+<!-- https://ui.nuxt.com/components/date-picker#usage -->
+
 <template>
   <VCalendarDatePicker v-model="date" v-bind="{ ...attrs, ...$attrs }" />
 </template>
