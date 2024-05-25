@@ -9,6 +9,7 @@ export default defineI18nConfig(() => ({
       proteins: "Proteins",
       fats: "Fats",
       carbs: "Carbs",
+      search: "Search"
     },
     ru: {
       diary: "Журнал",
@@ -18,6 +19,7 @@ export default defineI18nConfig(() => ({
       proteins: "Белки",
       fats: "Жиры",
       carbs: "Углеводы",
+      search: "Поиск"
     },
   },
 }));
