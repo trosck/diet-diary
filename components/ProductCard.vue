@@ -1,5 +1,5 @@
 <template>
-  <UCard :ui="{ base: $props.class }">
+  <UCard>
     <template #header>
       <div>{{ $props.name }}</div>
     </template>
@@ -12,5 +12,5 @@
 import type { Product } from "~/types/Product";
 import ProductNutrientList from "./ProductNutrientList.vue";
 
-defineProps<Product & { class?: string }>();
+defineProps<Product>();
 </script>
