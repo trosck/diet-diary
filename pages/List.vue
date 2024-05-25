@@ -1,5 +1,8 @@
 <template>
-  <div class="flex">
+  <UButtonGroup
+    orientation="horizontal"
+    :ui="{ wrapper: { horizontal: 'flex' } }"
+  >
     <UInput
       :ui="{ wrapper: 'grow' }"
       icon="i-heroicons-magnifying-glass-20-solid"
@@ -10,7 +13,7 @@
     />
 
     <UButton icon="i-heroicons-plus" :ui="{ base: 'ml-3' }" square />
-  </div>
+  </UButtonGroup>
 
   <ProductCard
     v-for="product of filteredProducts"
