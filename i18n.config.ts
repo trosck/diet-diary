@@ -2,24 +2,26 @@ export default defineI18nConfig(() => ({
   legacy: false,
   messages: {
     en: {
-      diary: "Diary",
-      add: "Add",
-      list: "List",
-      calories: "Calories",
-      proteins: "Proteins",
-      fats: "Fats",
-      carbs: "Carbs",
-      search: "Search"
+      diary: "diary",
+      add: "add",
+      list: "list",
+      calories: "calories",
+      proteins: "proteins",
+      fats: "fats",
+      carbs: "carbs",
+      search: "search",
+      grams: "grams"
     },
     ru: {
-      diary: "Журнал",
-      add: "Добавить",
-      list: "Список",
-      calories: "Калории",
-      proteins: "Белки",
-      fats: "Жиры",
-      carbs: "Углеводы",
-      search: "Поиск"
+      diary: "журнал",
+      add: "добавить",
+      list: "список",
+      calories: "калории",
+      proteins: "белки",
+      fats: "жиры",
+      carbs: "углеводы",
+      search: "поиск",
+      grams: 'грамм'
     },
   },
 }));
