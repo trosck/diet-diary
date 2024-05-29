@@ -36,7 +36,7 @@ const SCREEN_TYPE = {
   SOME: "some",
 };
 
-const screen = ref(SCREEN_TYPE.DIARY);
+const screen = ref(SCREEN_TYPE.LIST);
 
 const isLoading = ref(false);
 
