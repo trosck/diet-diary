@@ -13,7 +13,7 @@
         >
           <ProductSelectMenu v-model="state[index]" />
           <div class="h-3"></div>
-          <AddMealModalCountInput v-model="state[index]" />
+          <AddDishModalCountInput v-model="state[index]" />
         </UFormGroup>
 
         <UButton
@@ -42,7 +42,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Meal, ProductsListItem } from "~/types/Meal";
+import type { ProductIndexedNumerable } from "~/types/Dish";
+import type { Meal } from "~/types/Meal";
 
 const emit = defineEmits<{
   (e: "save", value: Meal): void;
@@ -50,7 +51,7 @@ const emit = defineEmits<{
 
 const model = defineModel();
 
-const baseItem: ProductsListItem = {
+const baseItem: ProductIndexedNumerable = {
   id: 0,
   name: "",
   calories: 0,
@@ -91,6 +92,7 @@ function cancel() {
 
 function save() {
   emit("save", {
+    date: new Date(),
     name: mealName.value,
     products: [...toRaw(state)],
   });

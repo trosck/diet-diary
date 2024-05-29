@@ -18,12 +18,11 @@
 </template>
 
 <script setup lang="ts">
-import type { ProductsListItem } from "~/types/Meal";
-
+import type { ProductIndexedNumerable } from "~/types/Dish";
 import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 
-const model = defineModel<ProductsListItem>();
+const model = defineModel<ProductIndexedNumerable>();
 
 const measurementType = ref(t("measurement.gramm.short"));
 const measurementKey = computed(() =>

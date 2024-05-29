@@ -42,8 +42,6 @@
       />
     </UButtonGroup>
   </div>
-
-  <AddMealModal v-model="isModalOpen" @save="addMeal" />
 </template>
 
 <script setup lang="ts">
@@ -51,8 +49,8 @@ import ProductCard from "~/components/ProductCard.vue";
 import DatePicker from "~/components/DatePicker.vue";
 
 import { format } from "date-fns";
-import type { Meal, ProductsListItem } from "~/types/Meal";
 import type { Product } from "~/types/Product";
+import type { Meal } from "~/types/Meal";
 
 const date = ref(new Date());
 

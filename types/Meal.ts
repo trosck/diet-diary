@@ -1,11 +1,5 @@
-import type { ProductIndexed } from "./Product";
+import type { Dish } from "./Dish";
 
-export interface ProductsListItem extends ProductIndexed {
-  weight?: number;
-  amount?: number;
-}
-
-export interface Meal {
-  products: ProductsListItem[];
-  name: string;
+export interface Meal extends Dish {
+  date: Date;
 }
