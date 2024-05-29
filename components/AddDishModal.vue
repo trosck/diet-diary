@@ -1,7 +1,7 @@
 <template>
   <UModal v-model="model" :ui="{ container: 'flex-col', base: 'grow' }">
     <UForm class="flex flex-col p-5 grow" :state="state">
-      <UFormGroup label="Meal name" :ui="{ wrapper: 'mb-5' }">
+      <UFormGroup :label="$t('dishName')" :ui="{ wrapper: 'mb-5 capitalize' }">
         <UInput v-model="mealName" />
       </UFormGroup>
 
