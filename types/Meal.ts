@@ -6,5 +6,6 @@ export interface ProductsListItem extends ProductIndexed {
 
 export interface Meal {
   products: ProductsListItem[];
+  name: string;
   date: Date;
 }
