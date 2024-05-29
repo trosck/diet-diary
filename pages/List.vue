@@ -1,18 +1,18 @@
 <template>
   <UButtonGroup
     orientation="horizontal"
-    :ui="{ wrapper: { horizontal: 'flex' } }"
+    :ui="{ wrapper: { horizontal: 'flex sticky top-0' } }"
   >
     <UInput
       :ui="{ wrapper: 'grow' }"
       icon="i-heroicons-magnifying-glass-20-solid"
       :trailing="false"
-      :placeholder="$t('search') + '...'"
+      :placeholder="$t('placeholder.search') + '...'"
       v-model="search"
       color="white"
     />
 
-    <UButton icon="i-heroicons-plus" :ui="{ base: 'ml-3' }" square />
+    <UButton icon="i-heroicons-plus" :ui="{ base: 'ml-3' }" square color="gray" />
   </UButtonGroup>
 
   <ProductCard
