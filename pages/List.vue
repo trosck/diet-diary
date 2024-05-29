@@ -12,7 +12,13 @@
       color="white"
     />
 
-    <UButton icon="i-heroicons-plus" :ui="{ base: 'ml-3' }" square color="gray" />
+    <UButton
+      icon="i-heroicons-plus"
+      :ui="{ base: 'ml-3' }"
+      square
+      color="gray"
+      @click="isModalOpen = true"
+    />
   </UButtonGroup>
 
   <ProductCard
@@ -20,10 +26,14 @@
     v-bind="product"
     class="mt-5"
   />
+
+  <AddProductModal v-model="isModalOpen" />
 </template>
 
 <script setup lang="ts">
 const search = ref("");
+
+const isModalOpen = ref(false);
 
 const productsStore = useProductsStore();
 
