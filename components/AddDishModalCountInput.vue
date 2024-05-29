@@ -1,6 +1,7 @@
 <template>
   <UButtonGroup v-if="model">
     <UInput
+      type="number"
       icon="i-heroicons-scale"
       v-model="model[measurementKey]"
       v-select-on-click
