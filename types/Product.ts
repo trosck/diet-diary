@@ -5,3 +5,7 @@ export interface Product {
   fats: number;
   carbs: number;
 }
+
+export interface ProductIndexed extends Product {
+  id: number;
+}
