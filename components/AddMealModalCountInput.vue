@@ -3,7 +3,7 @@
     <UInput
       icon="i-heroicons-scale"
       v-model="model[measurementKey]"
-      @click="(e: any) => e.target.select()"
+      v-select-on-click
     />
 
     <USelect
