@@ -1,8 +1,11 @@
 <template>
   <UModal v-model="model" :ui="{ container: 'flex-col', base: 'grow' }">
-    <UForm class="flex flex-col p-5 grow">
+    <UForm class="flex flex-col p-5 grow" :state="state">
+      <UFormGroup label="Meal name" :ui="{ wrapper: 'mb-5' }">
+        <UInput v-model="mealName" />
+      </UFormGroup>
+
       <div class="grow">
-        {{ state }}
         <UFormGroup
           label="Product"
           v-for="(item, index) of state"
@@ -61,9 +64,16 @@ const baseItem: ProductsListItem = {
   weight: 0,
 };
 
+const mealName = ref("");
+
 const state: (typeof baseItem)[] = reactive([]);
 
-addEmptyItem();
+resetState();
+
+function resetState() {
+  clearState();
+  addEmptyItem();
+}
 
 function addEmptyItem() {
   state.push({ ...baseItem });
@@ -75,21 +85,21 @@ function closeModal() {
 
 function clearState() {
   state.splice(0, state.length);
-  addEmptyItem();
 }
 
 function cancel() {
   closeModal();
-  clearState();
+  resetState();
 }
 
 function save() {
   emit("save", {
+    name: mealName.value,
     date: new Date(),
-    products: state,
+    products: [...toRaw(state)],
   });
 
   closeModal();
-  clearState();
+  resetState();
 }
 </script>
