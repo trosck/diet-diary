@@ -9,8 +9,19 @@ export default defineI18nConfig(() => ({
       proteins: "proteins",
       fats: "fats",
       carbs: "carbs",
-      search: "search",
-      grams: "grams"
+      edit: "edit",
+      save: "save",
+      cancel: "cancel",
+      placeholder: {
+        search: "search",
+        selectProduct: "select a product",
+      },
+      measurement: {
+        gramm: {
+          short: "g",
+          long: "grams",
+        },
+      },
     },
     ru: {
       diary: "журнал",
@@ -20,8 +31,19 @@ export default defineI18nConfig(() => ({
       proteins: "белки",
       fats: "жиры",
       carbs: "углеводы",
-      search: "поиск",
-      grams: 'грамм'
+      edit: "редактировать",
+      save: "сохранить",
+      cancel: "отменить",
+      placeholder: {
+        search: "поиск",
+        selectProduct: "выберите продукт",
+      },
+      measurement: {
+        gramm: {
+          short: "г",
+          long: "грамм",
+        },
+      },
     },
   },
 }));
