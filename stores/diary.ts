@@ -1,6 +1,6 @@
 import type { Meal } from "~/types/Meal";
 
-export const useDiaryStore = defineStore("products", {
+export const useDiaryStore = defineStore("diary", {
   state: () => ({
     meals: [] as Meal[],
   }),
