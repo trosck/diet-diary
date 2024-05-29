@@ -21,6 +21,10 @@ export default defineI18nConfig(() => ({
           short: "g",
           long: "grams",
         },
+        quantity: {
+          short: "qty",
+          long: "quantity"
+        }
       },
     },
     ru: {
@@ -43,6 +47,10 @@ export default defineI18nConfig(() => ({
           short: "г",
           long: "грамм",
         },
+        quantity: {
+          short: "кол-во",
+          long: "количество"
+        }
       },
     },
   },
