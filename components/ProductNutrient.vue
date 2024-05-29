@@ -1,6 +1,6 @@
 <template>
   <div class="nutrient_container">
-    <div class="nutrient_name">{{ $props.name }}</div>
+    <div class="nutrient_name capitalize">{{ $props.name }}</div>
     <div class="nutrient_value">{{ $props.value }}</div>
   </div>
 </template>
