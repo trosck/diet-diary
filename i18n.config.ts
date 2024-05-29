@@ -12,6 +12,7 @@ export default defineI18nConfig(() => ({
       edit: "edit",
       save: "save",
       cancel: "cancel",
+      name: "name",
       placeholder: {
         search: "search",
         selectProduct: "select a product",
@@ -38,6 +39,7 @@ export default defineI18nConfig(() => ({
       edit: "редактировать",
       save: "сохранить",
       cancel: "отменить",
+      name: "название",
       placeholder: {
         search: "поиск",
         selectProduct: "выберите продукт",
