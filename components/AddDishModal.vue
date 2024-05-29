@@ -92,7 +92,6 @@ function cancel() {
 function save() {
   emit("save", {
     name: mealName.value,
-    date: new Date(),
     products: [...toRaw(state)],
   });
 
