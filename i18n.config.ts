@@ -2,6 +2,7 @@ export default defineI18nConfig(() => ({
   legacy: false,
   messages: {
     en: {
+      dishes: "dishes",
       diary: "diary",
       add: "add",
       list: "list",
@@ -24,11 +25,12 @@ export default defineI18nConfig(() => ({
         },
         quantity: {
           short: "qty",
-          long: "quantity"
-        }
+          long: "quantity",
+        },
       },
     },
     ru: {
+      dishes: "блюда",
       diary: "журнал",
       add: "добавить",
       list: "список",
@@ -51,8 +53,8 @@ export default defineI18nConfig(() => ({
         },
         quantity: {
           short: "кол-во",
-          long: "количество"
-        }
+          long: "количество",
+        },
       },
     },
   },
