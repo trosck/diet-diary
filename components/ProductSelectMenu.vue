@@ -1,19 +1,12 @@
 <template>
   <USelectMenu
     searchable
-    creatable
     by="id"
-    v-model="selected"
-    :options="productsStore.products"
+    v-model="model"
+    :options="productsStore.products.slice(0, 10)"
     option-attribute="name"
     :search-attributes="['name']"
-    placeholder="Select a product"
-    show-create-option-when="always"
-    :uiMenu="{
-      option: {
-        container: 'grow'
-      }
-    }"
+    :placeholder="$t('placeholder.selectProduct') + '...'"
   >
     <template #option="{ option: product }">
       <div class="grow">
@@ -26,5 +19,5 @@
 
 <script setup lang="ts">
 const productsStore = useProductsStore();
-const selected = ref(null);
+const model = defineModel();
 </script>
