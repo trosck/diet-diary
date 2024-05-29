@@ -1,11 +1,9 @@
 <template>
   <USelectMenu
-    searchable
     by="id"
     v-model="model"
-    :options="productsStore.products.slice(0, 10)"
+    :searchable="onSearch"
     option-attribute="name"
-    :search-attributes="['name']"
     :placeholder="$t('placeholder.selectProduct') + '...'"
   >
     <template #option="{ option: product }">
@@ -20,4 +18,11 @@
 <script setup lang="ts">
 const productsStore = useProductsStore();
 const model = defineModel();
+
+function onSearch(query: string) {
+  const searchQuery = query.toLowerCase();
+  return productsStore.products
+    .filter((product) => product.name.includes(searchQuery))
+    .slice(0, 50);
+}
 </script>
