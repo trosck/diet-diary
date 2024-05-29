@@ -69,6 +69,7 @@ const state: (typeof baseItem)[] = reactive([]);
 resetState();
 
 function resetState() {
+  mealName.value = "";
   clearState();
   addEmptyItem();
 }
