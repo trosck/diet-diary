@@ -21,32 +21,15 @@
     />
   </UButtonGroup>
 
-  <ProductCard
+  <!-- <ProductCard
     v-for="product of filteredProducts"
     v-bind="product"
     class="mt-5"
-  />
-
-  <AddProductModal v-model="isModalOpen" @save="addProduct" />
+  /> -->
 </template>
 
 <script setup lang="ts">
-import type { Product } from "~/types/Product";
-
 const search = ref("");
 
 const isModalOpen = ref(false);
-
-const productsStore = useProductsStore();
-
-const filteredProducts = computed(() => {
-  const searchValue = search.value.toLowerCase();
-  return productsStore.products.filter((product) =>
-    product.name.toLowerCase().includes(searchValue)
-  );
-});
-
-function addProduct(product: Product) {
-  productsStore.addProduct(product);
-}
 </script>
