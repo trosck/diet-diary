@@ -6,7 +6,6 @@ export const useDiaryStore = defineStore("products", {
   }),
   actions: {
     async addMeal(meal: Meal) {
-      console.log("meal", meal)
       this.meals.push(meal);
     },
   },
