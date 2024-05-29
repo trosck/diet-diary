@@ -12,12 +12,8 @@
           :ui="{ wrapper: 'mb-5' }"
         >
           <ProductSelectMenu v-model="state[index]" />
-          <UInput
-            :ui="{ base: 'mt-2' }"
-            icon="i-heroicons-scale"
-            v-model="state[index]['weight']"
-            @click="(e: any) => e.target.select()"
-          />
+          <div class="h-3"></div>
+          <AddMealModalCountInput v-model="state[index]" />
         </UFormGroup>
 
         <UButton
@@ -62,6 +58,7 @@ const baseItem: ProductsListItem = {
   fats: 0,
   carbs: 0,
   weight: 0,
+  amount: 0,
 };
 
 const mealName = ref("");
