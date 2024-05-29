@@ -10,5 +10,10 @@ export default defineAppConfig({
         size: "xl",
       },
     },
+    select: {
+      default: {
+        size: "xl",
+      },
+    },
   },
 });
