@@ -71,7 +71,11 @@ function calculateMealNutritions(meal: Meal): Product {
   for (const product of meal.products) {
     for (const nutrientKey in nutrients) {
       const key = nutrientKey as keyof typeof nutrients;
-      nutrients[key] += +(product[key] * (product.weight / 1000)).toFixed(1);
+      if (product.weight) {
+        nutrients[key] += +(product[key] * (product.weight / 1000)).toFixed(1);
+      } else if (product.amount) {
+        nutrients[key] += product[key] * product.amount;
+      }
     }
   }
 
