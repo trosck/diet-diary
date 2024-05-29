@@ -15,5 +15,11 @@ export const useProductsStore = defineStore("products", {
           }))
         );
     },
+    async addProduct(product: Product) {
+      this.products.push({
+        id: this.products.length,
+        ...product,
+      });
+    },
   },
 });
