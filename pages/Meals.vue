@@ -27,10 +27,12 @@
     class="mt-5"
   />
 
-  <AddProductModal v-model="isModalOpen" />
+  <AddProductModal v-model="isModalOpen" @save="addProduct" />
 </template>
 
 <script setup lang="ts">
+import type { Product } from "~/types/Product";
+
 const search = ref("");
 
 const isModalOpen = ref(false);
@@ -43,4 +45,8 @@ const filteredProducts = computed(() => {
     product.name.toLowerCase().includes(searchValue)
   );
 });
+
+function addProduct(product: Product) {
+  productsStore.addProduct(product);
+}
 </script>

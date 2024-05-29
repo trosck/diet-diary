@@ -8,7 +8,7 @@
       </div>
 
       <div v-show="screen === SCREEN_TYPE.DIARY"><Diary /></div>
-      <div v-show="screen === SCREEN_TYPE.LIST"><List /></div>
+      <div v-show="screen === SCREEN_TYPE.LIST"><Meals /></div>
     </div>
 
     <div class="flex justify-between w-full">
@@ -28,11 +28,11 @@
 
 <script setup lang="ts">
 import Diary from "./Diary.vue";
-import List from "./List.vue";
+import Meals from "./Meals.vue";
 
 const SCREEN_TYPE = {
   DIARY: "diary",
-  LIST: "list",
+  LIST: "meals",
   SOME: "some",
 };
 
