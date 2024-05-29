@@ -1,29 +1,19 @@
-import type { Product } from "~/types/Product";
+import type { Product, ProductIndexed } from "~/types/Product";
 
 export const useProductsStore = defineStore("products", {
   state: () => ({
-    products: [] as (Product & { id: number })[],
+    products: [] as ProductIndexed[],
   }),
   actions: {
     async fetchProducts() {
-      this.products = [
-        {
-          id: 1,
-          name: "meal",
-          calories: 150,
-          fats: 20,
-          proteins: 60,
-          carbs: 50,
-        },
-        {
-          id: 2,
-          name: "meal",
-          calories: 150,
-          fats: 20,
-          proteins: 60,
-          carbs: 50,
-        },
-      ];
+      this.products = await fetch("/data.json")
+        .then((response) => response.json())
+        .then((response) =>
+          response.map((product: Product, index: number) => ({
+            id: index,
+            ...product,
+          }))
+        );
     },
   },
 });
