@@ -1,9 +1,18 @@
 <template>
   <div :class="row && 'grid grid-cols-4'">
     <ProductNutrient :name="$t('calories')" :value="$props.calories" />
-    <ProductNutrient :name="$t('proteins')" :value="$props.proteins" />
-    <ProductNutrient :name="$t('fats')" :value="$props.fats" />
-    <ProductNutrient :name="$t('carbs')" :value="$props.carbs" />
+    <ProductNutrient
+      :name="$t('proteins')"
+      :value="$props.proteins + $t('measurement.gramm.short')"
+    />
+    <ProductNutrient
+      :name="$t('fats')"
+      :value="$props.fats + $t('measurement.gramm.short')"
+    />
+    <ProductNutrient
+      :name="$t('carbs')"
+      :value="$props.carbs + $t('measurement.gramm.short')"
+    />
   </div>
 </template>
 
