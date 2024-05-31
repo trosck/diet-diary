@@ -1,12 +1,22 @@
 import type { Product, ProductIndexed } from "~/types/Product";
 
+const productsObjectStore = useObjectStore("products");
+
 export const useProductsStore = defineStore("products", {
   state: () => ({
     products: [] as ProductIndexed[],
   }),
   actions: {
+    async saveProducts(products: Product[]) {
+      await productsObjectStore((store) => {
+        for (const product of products) {
+          store.add?.(product);
+        }
+      }, "readwrite");
+    },
+
     async fetchProducts() {
-      this.products = await fetch("/data.json")
+      const products = await fetch("/data.json")
         .then((response) => response.json())
         .then((response) =>
           response.map((product: Product, index: number) => ({
@@ -14,12 +24,18 @@ export const useProductsStore = defineStore("products", {
             ...product,
           }))
         );
+
+      this.products = products;
+      await this.saveProducts(products);
     },
+
+    async pullProducts() {
+      this.products = await productsObjectStore((store) => store.getAll());
+    },
+
     async addProduct(product: Product) {
-      this.products.push({
-        id: this.products.length,
-        ...product,
-      });
+      await this.saveProducts([product]);
+      await this.pullProducts();
     },
   },
 });
