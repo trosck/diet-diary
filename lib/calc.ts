@@ -1,7 +1,7 @@
 import type { Dish } from "~/types/Dish";
-import type { Product } from "~/types/Product";
+import type { Nutrients } from "~/types/Product";
 
-export function calculateMealNutritions(dish: Dish): Product {
+export function calculateMealNutritions(dish: Dish): Nutrients {
   const nutrients = {
     calories: 0,
     fats: 0,
@@ -31,8 +31,5 @@ export function calculateMealNutritions(dish: Dish): Product {
     nutrients[key] = +value.toFixed(1);
   }
 
-  return {
-    name: dish.name,
-    ...nutrients,
-  };
+  return nutrients;
 }
