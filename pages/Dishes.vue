@@ -28,17 +28,27 @@
       class="mt-5"
     />
 
-    <UButtonGroup>
+    <UButtonGroup
+      orientation="horizontal"
+      :ui="{ wrapper: { horizontal: 'flex mt-3' } }"
+    >
       <UButton
-        icon="i-heroicons-pencil-square"
-        color="gray"
-        label="редактировать"
+        :ui="{ base: 'flex-1' }"
+        icon="i-heroicons-x-circle"
+        color="red"
+        :label="$t('delete')"
       />
-      <UButton icon="i-heroicons-x-circle" color="gray" label="удалить" />
+      <UButton
+        :ui="{ base: 'flex-1' }"
+        icon="i-heroicons-pencil-square"
+        color="green"
+        :label="$t('edit')"
+        @click="editDish(dish)"
+      />
     </UButtonGroup>
   </div>
 
-  <AddDishModal v-model="isModalOpen" @save="addDish" />
+  <AddDishModal v-model="isModalOpen" @save="saveDish" :state="modalState" />
 </template>
 
 <script setup lang="ts">
@@ -49,11 +59,9 @@ const search = ref("");
 
 const isModalOpen = ref(false);
 
-const dishesStore = useDishesStore();
+const modalState = ref();
 
-function addDish(dish: Dish) {
-  dishesStore.addDish(dish);
-}
+const dishesStore = useDishesStore();
 
 const filteredDishes = computed(() => {
   const searchQuery = search.value.toLowerCase();
@@ -65,4 +73,18 @@ const filteredDishes = computed(() => {
 onMounted(async () => {
   await dishesStore.pullDishes();
 });
+
+function saveDish(dish: Dish) {
+  if (modalState.value) {
+    modalState.value = null;
+    dishesStore.updateDish(dish);
+  } else {
+    dishesStore.addDish(dish);
+  }
+}
+
+function editDish(dish: Dish) {
+  modalState.value = dish;
+  isModalOpen.value = true;
+}
 </script>
