@@ -1,10 +1,12 @@
 <template>
   <div class="w-full relative h-screen flex flex-col">
     <div class="p-5 overflow-auto grow">
-      <div class="fixed z-10" v-if="isLoading">
-        <USkeleton class="h-40 w-full mb-5" />
-        <USkeleton class="h-40 w-full mb-5" />
-        <USkeleton class="h-40 w-full" />
+      <div v-if="isLoading">
+        <USkeleton class="h-12 w-full mb-5" />
+        <USkeleton class="h-40 w-full mb-3" />
+        <USkeleton class="h-10 w-full mb-5" />
+        <USkeleton class="h-40 w-full mb-3" />
+        <USkeleton class="h-10 w-full" />
       </div>
 
       <div v-else>
@@ -40,18 +42,15 @@ const SCREEN_TYPE = {
 
 const screen = ref(SCREEN_TYPE.DISHES);
 
-const isLoading = ref(false);
+const isLoading = ref(true);
 
 const productsStore = useProductsStore();
 
 onMounted(async () => {
-  isLoading.value = true;
-
   await productsStore.pullProducts();
 
   if (!productsStore.products.length) {
     await productsStore.fetchProducts();
-    return;
   }
 
   isLoading.value = false;
