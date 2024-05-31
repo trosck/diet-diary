@@ -1,22 +1,23 @@
 import type { Meal } from "~/types/Meal";
-
-const diaryObjectStore = useObjectStore("diary");
+import type { WithId } from "~/types/with-id";
 
 export const useDiaryStore = defineStore("diary", {
   state: () => ({
-    meals: [] as Meal[],
+    meals: [] as WithId<Meal>[],
   }),
   actions: {
     async addMeal(meal: Meal) {
-      this.meals.push(meal);
-
-      await diaryObjectStore((store) => {
-        store.add?.(meal);
-      }, "readwrite");
+      const db = await useIndexedDB();
+      const savedMealId = await db.add("diary", meal);
+      this.meals.push({
+        id: savedMealId,
+        ...meal,
+      });
     },
 
     async pullMeals() {
-      this.meals = await diaryObjectStore((store) => store.getAll());
+      const db = await useIndexedDB();
+      this.meals = await db.getAll("diary");
     },
   },
 });

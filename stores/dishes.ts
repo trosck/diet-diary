@@ -1,22 +1,36 @@
+import { uid } from "uid";
 import type { Dish } from "~/types/Dish";
-
-const dishesObjectStore = useObjectStore("dishes");
+import type { WithId } from "~/types/with-id";
 
 export const useDishesStore = defineStore("dishes", {
   state: () => ({
-    dishes: [] as Dish[],
+    dishes: [] as WithId<Dish>[],
   }),
   actions: {
     async addDish(dish: Dish) {
-      this.dishes.push(dish);
+      const db = await useIndexedDB();
+      const tx = db.transaction("dishes", "readwrite");
 
-      await dishesObjectStore((store) => {
-        store.add?.(dish);
-      }, "readwrite");
+      const item = {
+        id: uid(),
+        ...dish,
+      };
+
+      this.dishes.push(item);
+      await tx.store.add(item);
     },
 
     async pullDishes() {
-      this.dishes = await dishesObjectStore((store) => store.getAll?.());
+      const db = await useIndexedDB();
+      this.dishes = await db.getAll("dishes");
+    },
+
+    async updateDish(dish: WithId<Dish>) {
+      const db = await useIndexedDB();
+      await db.put("dishes", dish);
+
+      const index = this.dishes.findIndex((item) => item.id === dish.id);
+      this.dishes.splice(index, 1, dish);
     },
   },
 });
