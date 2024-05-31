@@ -9,20 +9,26 @@ export function calculateMealNutritions(dish: Dish): Product {
     proteins: 0,
   };
 
+  let totalWeight = 0;
   for (const product of dish.products) {
+    totalWeight += product?.weight ?? 0;
+
     for (const nutrientKey in nutrients) {
       const key = nutrientKey as keyof typeof nutrients;
       if (product.weight) {
-        nutrients[key] += product[key] * (product.weight / 1000);
+        nutrients[key] += (product[key] / 100) * product.weight;
       } else if (product.amount) {
         nutrients[key] += product[key] * product.amount;
       }
     }
   }
 
+  const weightMultiplier = totalWeight / 100;
+
   for (const nutrientKey in nutrients) {
     const key = nutrientKey as keyof typeof nutrients;
-    nutrients[key] = +nutrients[key].toFixed(1);
+    const value = nutrients[key] / weightMultiplier;
+    nutrients[key] = +value.toFixed(1);
   }
 
   return {
