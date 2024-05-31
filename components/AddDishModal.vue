@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Dish, ProductIndexedNumerable } from "~/types/Dish";
+import type { Dish, ProductNumerable } from "~/types/Dish";
 
 const emit = defineEmits<{
   (e: "save", value: Dish): void;
@@ -46,8 +46,11 @@ const emit = defineEmits<{
 
 const model = defineModel();
 
-const baseItem: ProductIndexedNumerable = {
-  id: 0,
+const props = defineProps<{
+  state?: Dish;
+}>();
+
+const baseItem: ProductNumerable = {
   name: "",
   calories: 0,
   proteins: 0,
@@ -60,6 +63,15 @@ const baseItem: ProductIndexedNumerable = {
 const mealName = ref("");
 
 const state: (typeof baseItem)[] = reactive([]);
+
+watch(
+  () => props.state,
+  (data) => {
+    const products = data?.products ?? [];
+    state.splice(0, 1, ...products);
+    mealName.value = data?.name ?? "";
+  }
+);
 
 resetState();
 
@@ -88,6 +100,7 @@ function cancel() {
 
 function save() {
   emit("save", {
+    ...props.state,
     name: mealName.value,
     products: [...toRaw(state)],
   });
