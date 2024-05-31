@@ -1,7 +1,7 @@
 import { openDB, type IDBPDatabase, type IDBPObjectStore } from "idb";
 
 const db_name = "dietDiary";
-const db_version = 2;
+const db_version = 1;
 
 let db: IDBPDatabase;
 async function useIndexedDB() {
