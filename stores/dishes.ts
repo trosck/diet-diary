@@ -23,6 +23,8 @@ export const useDishesStore = defineStore("dishes", {
     async deleteDish(dish: Required<WithId<Dish>>) {
       const db = await useIndexedDB();
       await db.delete("dishes", dish.id);
+      const index = this.dishes.findIndex((item) => item.id === dish.id);
+      this.dishes.splice(index, 1);
     },
 
     async pullDishes() {
