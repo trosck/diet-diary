@@ -17,7 +17,7 @@
         </UFormGroup>
 
         <UButton
-          :ui="{ base: 'capitalize mb-5' }"
+          :ui="{ base: 'mb-5' }"
           icon="i-heroicons-plus"
           @click="addEmptyItem"
           :label="$t('add')"
@@ -26,16 +26,12 @@
 
       <UButtonGroup>
         <UButton
-          :ui="{ base: 'grow capitalize' }"
+          :ui="{ base: 'grow' }"
           color="gray"
           @click="cancel"
           :label="$t('cancel')"
         />
-        <UButton
-          :ui="{ base: 'grow capitalize' }"
-          @click="save"
-          :label="$t('save')"
-        />
+        <UButton :ui="{ base: 'grow' }" @click="save" :label="$t('save')" />
       </UButtonGroup>
     </UForm>
   </UModal>

@@ -1,6 +1,7 @@
 export default defineAppConfig({
   ui: {
     button: {
+      base: "capitalize",
       default: {
         size: "xl",
       },

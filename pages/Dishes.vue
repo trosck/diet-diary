@@ -30,11 +30,11 @@
 
     <UButtonGroup>
       <UButton
-        icon="i-heroicons-edit"
-        square
+        icon="i-heroicons-pencil-square"
         color="gray"
-        @click="isModalOpen = true"
+        label="редактировать"
       />
+      <UButton icon="i-heroicons-x-circle" color="gray" label="удалить" />
     </UButtonGroup>
   </div>
 

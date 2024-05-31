@@ -20,7 +20,7 @@
         @click="screen = buttonName"
         :variant="screen === buttonName ? 'soft' : 'solid'"
         :ui="{
-          base: 'grow flex justify-center capitalize',
+          base: 'grow flex justify-center',
           rounded: 'rounded-none',
         }"
       />

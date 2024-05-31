@@ -2,14 +2,14 @@
   <UModal v-model="model" :ui="{ container: 'flex-col', base: 'grow' }">
     <UForm class="flex flex-col p-5 grow" :state="product">
       <div class="grow">
-        <UFormGroup :label="$t('name')" :ui="{ wrapper: 'mb-5 capitalize' }">
+        <UFormGroup :label="$t('name')" :ui="{ wrapper: 'mb-5' }">
           <UInput v-model="product.name" />
         </UFormGroup>
 
         <UFormGroup
           v-for="fieldName of formFields"
           :label="$t(fieldName)"
-          :ui="{ wrapper: 'mb-5 capitalize' }"
+          :ui="{ wrapper: 'mb-5' }"
         >
           <UInput v-model="product[fieldName]" v-select-on-click />
         </UFormGroup>
@@ -17,13 +17,13 @@
 
       <UButtonGroup>
         <UButton
-          :ui="{ base: 'grow capitalize' }"
+          :ui="{ base: 'grow' }"
           color="gray"
           @click="cancel"
           :label="$t('cancel')"
         />
         <UButton
-          :ui="{ base: 'grow capitalize' }"
+          :ui="{ base: 'grow' }"
           @click="save"
           :label="$t('add')"
         />
