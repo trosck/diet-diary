@@ -42,11 +42,10 @@
 </template>
 
 <script setup lang="ts">
-import type { ProductIndexedNumerable } from "~/types/Dish";
-import type { Meal } from "~/types/Meal";
+import type { Dish, ProductIndexedNumerable } from "~/types/Dish";
 
 const emit = defineEmits<{
-  (e: "save", value: Meal): void;
+  (e: "save", value: Dish): void;
 }>();
 
 const model = defineModel();
@@ -93,7 +92,6 @@ function cancel() {
 
 function save() {
   emit("save", {
-    date: new Date(),
     name: mealName.value,
     products: [...toRaw(state)],
   });
