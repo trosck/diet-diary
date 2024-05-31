@@ -13,11 +13,16 @@ export function calculateMealNutritions(dish: Dish): Product {
     for (const nutrientKey in nutrients) {
       const key = nutrientKey as keyof typeof nutrients;
       if (product.weight) {
-        nutrients[key] += +(product[key] * (product.weight / 1000)).toFixed(1);
+        nutrients[key] += product[key] * (product.weight / 1000);
       } else if (product.amount) {
         nutrients[key] += product[key] * product.amount;
       }
     }
+  }
+
+  for (const nutrientKey in nutrients) {
+    const key = nutrientKey as keyof typeof nutrients;
+    nutrients[key] = +nutrients[key].toFixed(1);
   }
 
   return {
