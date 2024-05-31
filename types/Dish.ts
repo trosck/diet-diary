@@ -1,11 +1,11 @@
-import type { ProductIndexed } from "./Product";
+import type { Product } from "./Product";
 
-export interface ProductIndexedNumerable extends ProductIndexed {
+export interface ProductNumerable extends Product {
   weight?: number;
   amount?: number;
 }
 
 export interface Dish {
-  products: ProductIndexedNumerable[];
+  products: ProductNumerable[];
   name: string;
 }
