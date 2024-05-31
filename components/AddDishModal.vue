@@ -65,11 +65,11 @@ const mealName = ref("");
 const state: (typeof baseItem)[] = reactive([]);
 
 watch(
-  () => props.state,
-  (data) => {
-    const products = data?.products ?? [];
+  () => model.value,
+  () => {
+    mealName.value = props.state?.name ?? "";
+    const products = props.state?.products ?? [];
     state.splice(0, 1, ...products);
-    mealName.value = data?.name ?? "";
   }
 );
 
