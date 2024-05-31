@@ -61,4 +61,8 @@ const filteredDishes = computed(() => {
     dish.name.toLowerCase().includes(searchQuery)
   );
 });
+
+onMounted(async () => {
+  await dishesStore.pullDishes();
+});
 </script>

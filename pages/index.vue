@@ -7,8 +7,10 @@
         <USkeleton class="h-40 w-full" />
       </div>
 
-      <div v-show="screen === SCREEN_TYPE.DIARY"><Diary /></div>
-      <div v-show="screen === SCREEN_TYPE.DISHES"><Dishes /></div>
+      <div v-else>
+        <div v-show="screen === SCREEN_TYPE.DIARY"><Diary /></div>
+        <div v-show="screen === SCREEN_TYPE.DISHES"><Dishes /></div>
+      </div>
     </div>
 
     <div class="flex justify-between w-full">
@@ -43,13 +45,14 @@ const isLoading = ref(false);
 const productsStore = useProductsStore();
 
 onMounted(async () => {
-  if (productsStore.products.length) {
-    return;
-  }
-
   isLoading.value = true;
 
-  await productsStore.fetchProducts();
+  await productsStore.pullProducts();
+
+  if (!productsStore.products.length) {
+    await productsStore.fetchProducts();
+    return;
+  }
 
   isLoading.value = false;
 });
