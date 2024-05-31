@@ -20,6 +20,11 @@ export const useDishesStore = defineStore("dishes", {
       await tx.store.add(item);
     },
 
+    async deleteDish(dish: Required<WithId<Dish>>) {
+      const db = await useIndexedDB();
+      await db.delete("dishes", dish.id);
+    },
+
     async pullDishes() {
       const db = await useIndexedDB();
       this.dishes = await db.getAll("dishes");
