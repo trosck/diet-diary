@@ -1,7 +1,9 @@
 import type { Dish } from "~/types/Dish";
 import type { Nutrients } from "~/types/Product";
 
-export function calculateMealNutritions(dish: Dish): Nutrients {
+export function calculateMealNutritions(
+  dish: Pick<Dish, "products">
+): Nutrients {
   const nutrients = {
     calories: 0,
     fats: 0,
