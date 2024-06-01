@@ -33,3 +33,13 @@ export function calculateMealNutritions(dish: Dish): Nutrients {
 
   return nutrients;
 }
+
+export function addIdenticalFields<T>(arr: T[]): T {
+  if (arr.length < 2) return arr[0];
+  return arr.reduce((state, item) => {
+    for (const key in item) {
+      (state[key] as number) += item[key] as number;
+    }
+    return state;
+  });
+}
