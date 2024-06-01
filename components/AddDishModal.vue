@@ -1,26 +1,29 @@
 <template>
-  <UModal v-model="model" :ui="{ container: 'flex-col', base: 'grow' }">
-    <UForm class="flex flex-col p-5 grow" :state="state">
+  <UModal fullscreen v-model="model">
+    <UForm class="flex flex-col p-5 grow overflow-y-auto" :state="state">
       <UFormGroup :label="$t('dishName')" :ui="{ wrapper: 'mb-5 capitalize' }">
         <UInput v-model="mealName" />
       </UFormGroup>
 
       <div class="grow">
-        <UFormGroup
-          label="Product"
-          v-for="(item, index) of state"
-          :ui="{ wrapper: 'mb-5' }"
-        >
-          <ProductSelectMenu v-model="state[index]" />
+        <UFormGroup v-for="(item, index) of state" :ui="{ wrapper: 'mb-5' }">
+          <UButtonGroup :ui="{ wrapper: { horizontal: 'flex' } }">
+            <UButton
+              icon="i-heroicons-x-circle"
+              color="red"
+              @click="deleteItem(index)"
+            />
+            <ProductSelectMenu v-model="state[index]" class="grow" />
+          </UButtonGroup>
           <div class="h-3"></div>
           <AddDishModalCountInput v-model="state[index]" />
         </UFormGroup>
 
         <UButton
-          :ui="{ base: 'mb-5' }"
           icon="i-heroicons-plus"
           @click="addEmptyItem"
           :label="$t('add')"
+          block
         />
       </div>
 
@@ -38,6 +41,7 @@
 </template>
 
 <script setup lang="ts">
+import { calculateMealNutritions } from "~/lib/calc";
 import type { Dish, ProductNumerable } from "~/types/Dish";
 
 const emit = defineEmits<{
@@ -47,7 +51,7 @@ const emit = defineEmits<{
 const model = defineModel();
 
 const props = defineProps<{
-  state?: Dish;
+  state?: Dish | null;
 }>();
 
 const baseItem: ProductNumerable = {
@@ -67,19 +71,13 @@ const state: (typeof baseItem)[] = reactive([]);
 watch(
   () => model.value,
   () => {
-    mealName.value = props.state?.name ?? "";
-    const products = props.state?.products ?? [];
-    state.splice(0, 1, ...products);
+    if (model.value) {
+      mealName.value = props.state?.name ?? "";
+      const products = props.state?.products ?? [{ ...baseItem }];
+      state.splice(0, state.length, ...products);
+    }
   }
 );
-
-resetState();
-
-function resetState() {
-  mealName.value = "";
-  clearState();
-  addEmptyItem();
-}
 
 function addEmptyItem() {
   state.push({ ...baseItem });
@@ -89,23 +87,24 @@ function closeModal() {
   model.value = false;
 }
 
-function clearState() {
-  state.splice(0, state.length);
-}
-
 function cancel() {
   closeModal();
-  resetState();
 }
 
 function save() {
+  const products = [...toRaw(state)];
+
   emit("save", {
     ...props.state,
+    products,
     name: mealName.value,
-    products: [...toRaw(state)],
+    ...calculateMealNutritions({ products }),
   });
 
   closeModal();
-  resetState();
+}
+
+function deleteItem(index: number) {
+  state.splice(index, 1);
 }
 </script>

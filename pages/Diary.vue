@@ -27,29 +27,19 @@
     />
   </UButtonGroup>
 
-  <div v-for="meal of diaryStore.meals">
-    <ProductCard
-      v-bind="calculateMealNutritions(meal)"
-      :name="meal.name"
-      class="mt-5"
-    />
-    <UButtonGroup>
-      <UButton
-        icon="i-heroicons-edit"
-        square
-        color="gray"
-        @click="isModalOpen = true"
-      />
-    </UButtonGroup>
+  <div v-if="nutrients">
+    <UCard>
+      <ProductNutrientList v-bind="nutrients" />
+    </UCard>
   </div>
 </template>
 
 <script setup lang="ts">
-import ProductCard from "~/components/ProductCard.vue";
 import DatePicker from "~/components/DatePicker.vue";
 
+import { addIdenticalFields, calculateMealNutritions } from "~/lib/calc";
 import { format } from "date-fns";
-import type { Product } from "~/types/Product";
+
 import type { Meal } from "~/types/Meal";
 
 const date = ref(new Date());
@@ -58,32 +48,11 @@ const diaryStore = useDiaryStore();
 
 const isModalOpen = ref(false);
 
-function calculateMealNutritions(meal: Meal): Product {
-  const nutrients = {
-    calories: 0,
-    fats: 0,
-    carbs: 0,
-    proteins: 0,
-  };
-
-  for (const product of meal.products) {
-    for (const nutrientKey in nutrients) {
-      const key = nutrientKey as keyof typeof nutrients;
-      if (product.weight) {
-        nutrients[key] += +(product[key] * (product.weight / 1000)).toFixed(1);
-      } else if (product.amount) {
-        nutrients[key] += product[key] * product.amount;
-      }
-    }
-  }
-
-  return {
-    name: meal.name,
-    ...nutrients,
-  };
-}
-
 function addMeal(meal: Meal) {
   diaryStore.addMeal(meal);
 }
+
+const nutrients = computed(() =>
+  addIdenticalFields(diaryStore.meals.map(calculateMealNutritions))
+);
 </script>
