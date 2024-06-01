@@ -1,7 +1,7 @@
 <template>
   <UModal fullscreen v-model="model">
     <UForm class="flex flex-col p-5 grow overflow-y-auto" :state="state">
-      <UFormGroup :label="$t('dishName')" :ui="{ wrapper: 'mb-5 capitalize' }">
+      <UFormGroup :label="$t('name')" :ui="{ wrapper: 'mb-5 capitalize' }">
         <UInput v-model="mealName" />
       </UFormGroup>
 
@@ -41,11 +41,11 @@
 </template>
 
 <script setup lang="ts">
-import { calculateMealNutritions } from "~/lib/calc";
 import type { Dish, ProductNumerable } from "~/types/Dish";
 
 const emit = defineEmits<{
   (e: "save", value: Dish): void;
+  (e: "cancel"): void;
 }>();
 
 const model = defineModel();
@@ -54,7 +54,7 @@ const props = defineProps<{
   state?: Dish | null;
 }>();
 
-const baseItem: ProductNumerable = {
+const getBaseItem = () => ({
   name: "",
   calories: 0,
   proteins: 0,
@@ -62,25 +62,25 @@ const baseItem: ProductNumerable = {
   carbs: 0,
   weight: 0,
   amount: 0,
-};
+});
 
 const mealName = ref("");
 
-const state: (typeof baseItem)[] = reactive([]);
+const state: ProductNumerable[] = reactive([]);
 
 watch(
   () => model.value,
   () => {
     if (model.value) {
       mealName.value = props.state?.name ?? "";
-      const products = props.state?.products ?? [{ ...baseItem }];
+      const products = props.state?.products ?? [getBaseItem()];
       state.splice(0, state.length, ...products);
     }
   }
 );
 
 function addEmptyItem() {
-  state.push({ ...baseItem });
+  state.push(getBaseItem());
 }
 
 function closeModal() {
@@ -89,6 +89,7 @@ function closeModal() {
 
 function cancel() {
   closeModal();
+  emit("cancel");
 }
 
 function save() {
@@ -96,9 +97,8 @@ function save() {
 
   emit("save", {
     ...props.state,
-    products,
     name: mealName.value,
-    ...calculateMealNutritions({ products }),
+    products,
   });
 
   closeModal();
