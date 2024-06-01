@@ -9,7 +9,6 @@ export const useDishesStore = defineStore("dishes", {
   actions: {
     async addDish(dish: Dish) {
       const db = await useIndexedDB();
-      const tx = db.transaction("dishes", "readwrite");
 
       const item = {
         id: uid(),
@@ -17,7 +16,7 @@ export const useDishesStore = defineStore("dishes", {
       };
 
       this.dishes.push(item);
-      await tx.store.add(item);
+      await db.add("dishes", item);
     },
 
     async deleteDish(dish: Required<WithId<Dish>>) {
