@@ -1,3 +1,4 @@
+import { uid } from "uid";
 import type { Meal } from "~/types/Meal";
 import type { WithId } from "~/types/with-id";
 
@@ -8,11 +9,22 @@ export const useDiaryStore = defineStore("diary", {
   actions: {
     async addMeal(meal: Meal) {
       const db = await useIndexedDB();
-      const savedMealId = await db.add("diary", meal);
-      this.meals.push({
-        id: savedMealId,
+
+      const item = {
+        id: uid(),
         ...meal,
-      });
+      };
+
+      this.meals.push(item);
+      await db.add("diary", item);
+    },
+
+    async updateMeal(meal: WithId<Meal>) {
+      const db = await useIndexedDB();
+      await db.put("diary", meal);
+
+      const index = this.meals.findIndex((item) => item.id === meal.id);
+      this.meals.splice(index, 1, meal);
     },
 
     async pullMeals() {
