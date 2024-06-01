@@ -21,12 +21,8 @@
     />
   </UButtonGroup>
 
-  <div v-for="dish of filteredDishes">
-    <ProductCard
-      v-bind="calculateMealNutritions(dish)"
-      :name="dish.name"
-      class="mt-5"
-    />
+  <div v-for="(dish, index) of filteredDishes" :key="dish.id">
+    <ProductCard v-bind="dish" class="mt-5" />
 
     <UButtonGroup
       orientation="horizontal"
@@ -37,18 +33,24 @@
         icon="i-heroicons-x-circle"
         color="red"
         :label="$t('delete')"
+        @click="deleteDish(filteredDishes[index])"
       />
       <UButton
         :ui="{ base: 'flex-1' }"
         icon="i-heroicons-pencil-square"
         color="green"
         :label="$t('edit')"
-        @click="editDish(dish)"
+        @click="editDish(filteredDishes[index])"
       />
     </UButtonGroup>
   </div>
 
-  <AddDishModal v-model="isModalOpen" @save="saveDish" :state="modalState" />
+  <AddDishModal
+    v-model="isModalOpen"
+    @save="saveDish"
+    @cancel="resetModalState"
+    :state="modalState"
+  />
 </template>
 
 <script setup lang="ts">
@@ -59,7 +61,7 @@ const search = ref("");
 
 const isModalOpen = ref(false);
 
-const modalState = ref();
+const modalState = ref<Dish | null>(null);
 
 const dishesStore = useDishesStore();
 
@@ -75,16 +77,28 @@ onMounted(async () => {
 });
 
 function saveDish(dish: Dish) {
+  const item = {
+    ...dish,
+    ...calculateMealNutritions(dish, { byWeight: true }),
+  };
+
   if (modalState.value) {
-    modalState.value = null;
-    dishesStore.updateDish(dish);
+    dishesStore.updateDish(item);
   } else {
-    dishesStore.addDish(dish);
+    dishesStore.addDish(item);
   }
+
+  resetModalState();
 }
 
 function editDish(dish: Dish) {
-  modalState.value = dish;
+  modalState.value = toRaw(dish);
   isModalOpen.value = true;
+}
+
+function deleteDish(dish: Dish) {}
+
+function resetModalState() {
+  modalState.value = null;
 }
 </script>
