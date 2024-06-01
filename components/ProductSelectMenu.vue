@@ -17,11 +17,13 @@
 
 <script setup lang="ts">
 const productsStore = useProductsStore();
+const dishesStore = useDishesStore();
 const model = defineModel();
 
 function onSearch(query: string) {
   const searchQuery = query.toLowerCase();
   return productsStore.products
+    .concat(dishesStore.dishes)
     .filter((product) => product.name.includes(searchQuery))
     .slice(0, 50);
 }
