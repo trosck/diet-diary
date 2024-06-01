@@ -30,7 +30,12 @@ export function calculateMealNutritions(
   for (const nutrientKey in nutrients) {
     const key = nutrientKey as keyof typeof nutrients;
     const value = nutrients[key] / weightMultiplier;
-    nutrients[key] = +value.toFixed(1);
+
+    if (isNaN(value)) {
+      nutrients[key];
+    } else {
+      nutrients[key] = +value.toFixed(1);
+    }
   }
 
   return nutrients;
