@@ -2,7 +2,8 @@ import type { Dish } from "~/types/Dish";
 import type { Nutrients } from "~/types/Product";
 
 export function calculateMealNutritions(
-  dish: Pick<Dish, "products">
+  dish: Pick<Dish, "products">,
+  { byWeight = false }: { byWeight: boolean } = { byWeight: false }
 ): Nutrients {
   const nutrients = {
     calories: 0,
@@ -17,10 +18,14 @@ export function calculateMealNutritions(
 
     for (const nutrientKey in nutrients) {
       const key = nutrientKey as keyof typeof nutrients;
+      const value = product[key];
+
+      if (!value) continue;
+
       if (product.weight) {
-        nutrients[key] += (product[key] / 100) * product.weight;
+        nutrients[key] += (value / 100) * product.weight;
       } else if (product.amount) {
-        nutrients[key] += product[key] * product.amount;
+        nutrients[key] += value * product.amount;
       }
     }
   }
@@ -29,7 +34,9 @@ export function calculateMealNutritions(
 
   for (const nutrientKey in nutrients) {
     const key = nutrientKey as keyof typeof nutrients;
-    const value = nutrients[key] / weightMultiplier;
+    const value = byWeight
+      ? nutrients[key] / weightMultiplier
+      : nutrients[key] * weightMultiplier;
 
     if (!isNaN(value)) {
       nutrients[key] = +value.toFixed(1);
