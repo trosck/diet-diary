@@ -5,7 +5,7 @@ export interface ProductNumerable extends Product {
   amount?: number;
 }
 
-export interface Dish extends Nutrients {
+export interface Dish extends Partial<Nutrients> {
   products: ProductNumerable[];
   name: string;
 }

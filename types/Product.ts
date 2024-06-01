@@ -5,6 +5,6 @@ export interface Nutrients {
   carbs: number;
 }
 
-export interface Product extends Nutrients {
+export interface Product extends Partial<Nutrients> {
   name: string;
 }
