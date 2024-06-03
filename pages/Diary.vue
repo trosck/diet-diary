@@ -33,29 +33,14 @@
     </UCard>
   </div>
 
-  <div v-for="(meal, index) of diaryStore.meals" :key="meal.id">
-    <ProductCard v-bind="meal" class="mt-5" />
-
-    <UButtonGroup
-      orientation="horizontal"
-      :ui="{ wrapper: { horizontal: 'flex mt-3' } }"
-    >
-      <UButton
-        :ui="{ base: 'flex-1' }"
-        icon="i-heroicons-x-circle"
-        color="red"
-        :label="$t('delete')"
-        @click="deleteMeal(diaryStore.meals[index])"
-      />
-      <UButton
-        :ui="{ base: 'flex-1' }"
-        icon="i-heroicons-pencil-square"
-        color="green"
-        :label="$t('edit')"
-        @click="editMeal(diaryStore.meals[index])"
-      />
-    </UButtonGroup>
-  </div>
+  <ProductCard
+    v-for="(meal, index) of diaryStore.meals"
+    :key="meal.id"
+    v-bind="meal"
+    class="mt-5"
+    @delete="deleteMeal(diaryStore.meals[index])"
+    @edit="editMeal(diaryStore.meals[index])"
+  />
 
   <AddDishModal
     v-model="isModalOpen"

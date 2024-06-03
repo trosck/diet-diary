@@ -21,29 +21,14 @@
     />
   </UButtonGroup>
 
-  <div v-for="(dish, index) of filteredDishes" :key="dish.id">
-    <ProductCard v-bind="dish" class="mt-5" />
-
-    <UButtonGroup
-      orientation="horizontal"
-      :ui="{ wrapper: { horizontal: 'flex mt-3' } }"
-    >
-      <UButton
-        :ui="{ base: 'flex-1' }"
-        icon="i-heroicons-x-circle"
-        color="red"
-        :label="$t('delete')"
-        @click="deleteDish(filteredDishes[index])"
-      />
-      <UButton
-        :ui="{ base: 'flex-1' }"
-        icon="i-heroicons-pencil-square"
-        color="green"
-        :label="$t('edit')"
-        @click="editDish(filteredDishes[index])"
-      />
-    </UButtonGroup>
-  </div>
+  <ProductCard
+    v-for="(dish, index) of filteredDishes"
+    :key="dish.id"
+    v-bind="dish"
+    class="mt-5"
+    @delete="deleteDish(filteredDishes[index])"
+    @edit="editDish(filteredDishes[index])"
+  />
 
   <AddDishModal
     v-model="isModalOpen"

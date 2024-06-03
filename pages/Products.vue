@@ -21,9 +21,12 @@
     />
   </UButtonGroup>
 
-  <div v-for="product of filteredProducts" :key="product.id">
-    <ProductCard v-bind="product" class="mt-5" />
-  </div>
+  <ProductCard
+    v-for="product of filteredProducts"
+    :key="product.id"
+    v-bind="product"
+    class="mt-5"
+  />
 
   <AddProductModal v-model="isModalOpen" @save="saveProduct" />
 </template>
