@@ -12,6 +12,7 @@
       <div v-else>
         <div v-show="screen === SCREEN_TYPE.DIARY"><Diary /></div>
         <div v-show="screen === SCREEN_TYPE.DISHES"><Dishes /></div>
+        <div v-show="screen === SCREEN_TYPE.PRODUCTS"><Products /></div>
       </div>
     </div>
 
@@ -33,14 +34,15 @@
 <script setup lang="ts">
 import Diary from "./Diary.vue";
 import Dishes from "./Dishes.vue";
+import Products from "./Products.vue";
 
 const SCREEN_TYPE = {
   DIARY: "diary",
   DISHES: "dishes",
-  SOME: "some",
+  PRODUCTS: "products",
 };
 
-const screen = ref(SCREEN_TYPE.DISHES);
+const screen = ref(SCREEN_TYPE.PRODUCTS);
 
 const isLoading = ref(true);
 
