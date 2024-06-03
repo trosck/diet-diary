@@ -79,7 +79,7 @@ onMounted(async () => {
 function saveDish(dish: Dish) {
   const item = {
     ...dish,
-    ...calculateMealNutritions(dish, { byWeight: true }),
+    ...calculateMealNutritions(dish, { asPortion: true }),
   };
 
   if (modalState.value) {

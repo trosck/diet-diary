@@ -3,7 +3,7 @@ import type { Nutrients } from "~/types/Product";
 
 export function calculateMealNutritions(
   dish: Pick<Dish, "products">,
-  { byWeight = false }: { byWeight: boolean } = { byWeight: false }
+  { asPortion = false }: { asPortion: boolean } = { asPortion: false }
 ): Nutrients {
   const nutrients = {
     calories: 0,
@@ -34,7 +34,7 @@ export function calculateMealNutritions(
 
   for (const nutrientKey in nutrients) {
     const key = nutrientKey as keyof typeof nutrients;
-    const value = byWeight
+    const value = asPortion
       ? nutrients[key] / weightMultiplier
       : nutrients[key] * weightMultiplier;
 
