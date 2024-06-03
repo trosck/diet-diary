@@ -66,8 +66,10 @@ const diaryStore = useDiaryStore();
 
 const isModalOpen = ref(false);
 
-onMounted(async () => {
-  await diaryStore.pullMeals();
+watch(date, () => diaryStore.pullMeals(date.value));
+
+onMounted(() => {
+  diaryStore.pullMeals(date.value);
 });
 
 const nutrients = computed(() => summarizeNutrients(diaryStore.meals));
