@@ -11,7 +11,7 @@
           :label="$t(fieldName)"
           :ui="{ wrapper: 'mb-5 capitalize' }"
         >
-          <UInput v-model="product[fieldName]" v-select-on-click />
+          <UInput v-model="product[fieldName]" v-select-on-click type="number" />
         </UFormGroup>
       </div>
 
