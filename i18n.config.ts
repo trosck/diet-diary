@@ -2,6 +2,7 @@ export default defineI18nConfig(() => ({
   legacy: false,
   messages: {
     en: {
+      products: "products",
       dishName: "dish name",
       dishes: "dishes",
       diary: "diary",
@@ -32,6 +33,7 @@ export default defineI18nConfig(() => ({
       },
     },
     ru: {
+      products: "продукты",
       dishName: "название блюда",
       dishes: "блюда",
       diary: "журнал",
