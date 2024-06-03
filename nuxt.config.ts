@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   modules: ["@nuxtjs/i18n", "@nuxt/ui", "@pinia/nuxt"],
   i18n: {
     strategy: "no_prefix",
-    defaultLocale: "ru",
+    defaultLocale: "en",
   },
   devServer: {
     host: "0.0.0.0",
