@@ -68,7 +68,7 @@
 <script setup lang="ts">
 import DatePicker from "~/components/DatePicker.vue";
 
-import { addIdenticalFields, calculateMealNutritions } from "~/lib/calc";
+import { summarizeNutrients, calculateMealNutritions } from "~/lib/calc";
 import { format } from "date-fns";
 
 import type { Meal } from "~/types/Meal";
@@ -85,7 +85,7 @@ onMounted(async () => {
   await diaryStore.pullMeals();
 });
 
-const nutrients = computed(() => addIdenticalFields(diaryStore.meals));
+const nutrients = computed(() => summarizeNutrients(diaryStore.meals));
 
 function saveMeal(meal: Meal) {
   const item = {
