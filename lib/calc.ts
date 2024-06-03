@@ -46,12 +46,27 @@ export function calculateMealNutritions(
   return nutrients;
 }
 
-export function addIdenticalFields<T>(arr: T[]): T {
+export function summarizeNutrients(arr: any[]) {
   if (arr.length < 2) return arr[0];
-  return arr.reduce((state, item) => {
-    for (const key in item) {
-      (state[key] as number) += item[key] as number;
+
+  const nutrients = {
+    calories: 0,
+    fats: 0,
+    carbs: 0,
+    proteins: 0,
+  };
+
+  for (const item of arr) {
+    for (const nutrientKey in nutrients) {
+      const key = nutrientKey as keyof typeof nutrients;
+      nutrients[key] += item[key];
     }
-    return state;
-  });
+  }
+
+  for (const nutrientKey in nutrients) {
+    const key = nutrientKey as keyof typeof nutrients;
+    nutrients[key] = +nutrients[key].toFixed(1);
+  }
+
+  return nutrients;
 }
