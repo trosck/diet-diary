@@ -5,7 +5,7 @@
   >
     <UPopover
       :popper="{ placement: 'bottom-start' }"
-      :ui="{ wrapper: 'w-full sticky top-0' }"
+      :ui="{ wrapper: 'w-full sticky top-0', container: 'w-[calc(100%-40px)]' }"
     >
       <UButton
         icon="i-heroicons-calendar-days-20-solid"
