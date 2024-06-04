@@ -1,7 +1,11 @@
 <!-- https://ui.nuxt.com/components/date-picker#usage -->
 
 <template>
-  <VCalendarDatePicker v-model="date" v-bind="{ ...attrs, ...$attrs }" />
+  <VCalendarDatePicker
+    expanded
+    v-model="date"
+    v-bind="{ ...attrs, ...$attrs }"
+  />
 </template>
 
 <script setup lang="ts">
