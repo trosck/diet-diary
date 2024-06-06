@@ -1,11 +1,11 @@
 <template>
   <UButtonGroup
     orientation="horizontal"
-    :ui="{ wrapper: { horizontal: 'flex sticky top-0' } }"
+    :ui="{ wrapper: { horizontal: 'flex' } }"
   >
     <UPopover
       :popper="{ placement: 'bottom-start' }"
-      :ui="{ wrapper: 'w-full sticky top-0', container: 'w-[calc(100%-40px)]' }"
+      :ui="{ wrapper: 'w-full', container: 'w-[calc(100%-40px)]' }"
     >
       <UButton
         icon="i-heroicons-calendar-days-20-solid"

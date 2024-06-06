@@ -1,7 +1,7 @@
 <template>
   <UButtonGroup
     orientation="horizontal"
-    :ui="{ wrapper: { horizontal: 'flex sticky top-0' } }"
+    :ui="{ wrapper: { horizontal: 'flex' } }"
   >
     <UInput
       :ui="{ wrapper: 'grow' }"
