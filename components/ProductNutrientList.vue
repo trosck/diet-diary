@@ -1,5 +1,5 @@
 <template>
-  <div :class="row && 'grid grid-cols-4'">
+  <div :class="row && 'grid grid-cols-2'">
     <ProductNutrient :name="$t('calories')" :value="$props.calories" />
     <ProductNutrient
       :name="$t('proteins')"
