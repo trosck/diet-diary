@@ -1,10 +1,4 @@
-import {
-  deleteDB,
-  openDB,
-  type DBSchema,
-  type IDBPDatabase,
-  type IDBPObjectStore,
-} from "idb";
+import { openDB, type DBSchema } from "idb";
 
 import type { Dish } from "~/types/Dish";
 import type { Meal } from "~/types/Meal";
@@ -22,7 +16,7 @@ interface Schema extends DBSchema {
   diary: {
     value: Meal;
     key: string;
-    indexes: { date: Date };
+    indexes: { date: string };
   };
 }
 
