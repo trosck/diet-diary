@@ -2,6 +2,7 @@
   <UCard>
     <template #header>
       <div>{{ $props.name }}</div>
+      <div><slot name="afterHeader"></slot></div>
     </template>
 
     <ProductNutrientList v-bind="$props" row />
