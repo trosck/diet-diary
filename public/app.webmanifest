@@ -1,0 +1,13 @@
+{
+  "name": "Diet diary",
+  "start_url": "/",
+  "lang": "en",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/app_icon_512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

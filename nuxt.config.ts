@@ -13,12 +13,9 @@ export default defineNuxtConfig({
     head: {
       link: [
         {
-          rel: "stylesheet",
-          href: "https://unpkg.com/nes.css@2.3.0/css/nes.min.css",
-        },
-        {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css?family=Press+Start+2P",
+          rel: "manifest",
+          href: "/app.webmanifest",
+          type: "application/manifest+json",
         },
       ],
     },
