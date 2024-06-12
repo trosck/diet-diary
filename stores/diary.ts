@@ -1,5 +1,5 @@
 import { uid } from "uid";
-import { resetTime } from "~/lib/date";
+import { getFormattedDate } from "~/lib/date";
 import type { Meal } from "~/types/Meal";
 import type { WithId } from "~/types/with-id";
 
@@ -16,8 +16,6 @@ export const useDiaryStore = defineStore("diary", {
         ...meal,
       };
 
-      resetTime(item.date!);
-
       this.meals.push(item);
       await db.add("diary", item);
     },
@@ -31,8 +29,7 @@ export const useDiaryStore = defineStore("diary", {
     },
 
     async pullMeals(date: Date) {
-      const mealDate = new Date(date);
-      resetTime(mealDate);
+      const mealDate = getFormattedDate(date);
 
       const db = await useIndexedDB();
       const tx = await db.transaction("diary");
