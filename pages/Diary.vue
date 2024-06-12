@@ -40,7 +40,11 @@
     class="mt-5"
     @delete="deleteMeal(diaryStore.meals[index])"
     @edit="editMeal(diaryStore.meals[index])"
-  />
+  >
+    <template #afterHeader>
+      {{ meal.time }}
+    </template>
+  </ProductCard>
 
   <AddDishModal
     v-model="isModalOpen"
@@ -57,6 +61,7 @@ import { summarizeNutrients, calculateMealNutritions } from "~/lib/calc";
 import { format } from "date-fns";
 
 import type { Meal } from "~/types/Meal";
+import { getFormattedDate, getFormattedTime } from "~/lib/date";
 
 const date = ref(new Date());
 
@@ -78,13 +83,14 @@ function saveMeal(meal: Meal) {
   const item = {
     ...meal,
     ...calculateMealNutritions(meal),
-    date: meal.date ?? date.value,
   };
 
-  if (modalState.value) {
-    diaryStore.updateMeal(item);
-  } else {
+  if (!meal.date) {
+    item.time = getFormattedTime(new Date());
+    item.date = getFormattedDate(date.value);
     diaryStore.addMeal(item);
+  } else {
+    diaryStore.updateMeal(item);
   }
 
   resetModalState();
