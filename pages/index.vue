@@ -42,7 +42,7 @@ const SCREEN_TYPE = {
   PRODUCTS: "products",
 };
 
-const screen = ref(SCREEN_TYPE.PRODUCTS);
+const screen = ref(SCREEN_TYPE.DIARY);
 
 const isLoading = ref(true);
 
